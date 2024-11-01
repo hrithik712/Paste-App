@@ -10,14 +10,14 @@ const router = createBrowserRouter(
     {
       path:"/",
       element:
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full h-full flex flex-col ">
         <Navbar/>
         <Home/>
       </div>
     },
     {
       path:"/pastes",
-      element: <div className="w-full h-full flex flex-col">
+      element: <div className="w-full h-full flex flex-col ">
       <Navbar/>
       <Paste/>
     </div>
