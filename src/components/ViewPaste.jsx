@@ -31,7 +31,7 @@ const ViewPaste = () => {
           className="w-full text-black dark:text-white dark:bg-black border border-input dark:border-gray-600 rounded-md p-2 text-2xl text-bold font-bold hover:scale-105 transition duration-300"
         />
         <div
-          className="w-full flex flex-col items-start relative rounded bg-opacity-10 border border-[rgba(128,121,121,0.3)] dark:bg-black dark:border-gray-600 backdrop-blur-2xl hover:scale-105 transition duration-300"
+          className="w-full flex flex-col items-start relative rounded bg-opacity-10 border border-[rgba(128,121,121,0.3)] dark:bg-black dark:border-gray-900 backdrop-blur-2xl hover:scale-105 transition duration-300"
         >
           <div
             className="w-full rounded-t flex items-center justify-between gap-x-4 px-4 py-2 border-b border-[rgba(128,121,121,0.3)] dark:border-gray-600 bg-black"
@@ -47,7 +47,7 @@ const ViewPaste = () => {
                 onClick={() => navigate(-1)}
               >
                 <ArrowLeft className="group-hover:text-success-500 dark:text-white" size={20} />
-                <span className="absolute top-8 text-xs bg-gray-700 text-white rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="absolute top-8 text-xs bg-black text-white rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   Back
                 </span>
               </button>
@@ -56,7 +56,7 @@ const ViewPaste = () => {
                 onClick={downloadContent}
               >
                 <Download className="group-hover:text-success-500 dark:text-white" size={20} />
-                <span className="absolute top-8 text-xs bg-gray-700 text-white rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="absolute top-8 text-xs bg-black text-white rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   Download
                 </span>
               </button>
@@ -64,11 +64,11 @@ const ViewPaste = () => {
                 className="flex justify-center items-center transition-all duration-300 ease-in-out group relative hover:scale-110"
                 onClick={() => {
                   navigator.clipboard.writeText(paste?.content || "");
-                  toast.success("Copied to Clipboard");
+                  toast.success("Copied Successfully");
                 }}
               >
                 <Copy className="group-hover:text-success-500 dark:text-white" size={20} />
-                <span className="absolute top-8 text-xs bg-gray-700 text-white rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="absolute top-8 text-xs bg-black text-white rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   Copy
                 </span>
               </button>
@@ -80,7 +80,7 @@ const ViewPaste = () => {
             value={paste?.content || ""}
             disabled
             placeholder="Write Your Content Here...."
-            className="w-full p-3 focus-visible:ring-0 dark:text-white dark:bg-gray-800"
+            className="w-full p-3 focus-visible:ring-0 dark:text-white dark:bg-gray-900"
             style={{
               caretColor: "#000",
             }}

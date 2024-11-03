@@ -14,22 +14,20 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const ActivityGraph = ({ paste, onClose }) => {
   const data = {
-    labels: ["Likes", "Shares", "Views", "Edits"],
+    labels: ["Likes", "Shares", "Views"],
     datasets: [
       {
         label: "Total Count",
-        data: [paste.likes || 0, paste.shares || 0, paste.views || 0, paste.edits || 0 ], 
+        data: [paste.likes || 0, paste.shares || 0, paste.views || 0], 
         backgroundColor: [
           "#0080FF",
           "#FF8000",
           "#00FFFF",
-          "orange"
         ],
         borderColor: [
           "black",
           "black",
           "black",
-          "Black"
         ],
         borderWidth: 1.5,
       },

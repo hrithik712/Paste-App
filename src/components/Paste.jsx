@@ -10,12 +10,14 @@ import {
   Filter,
   BarChart, 
 } from "lucide-react";
+import React from 'react';
 import toast from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { removeFromPastes } from "../redux/pasteSlice";
 import { FormatDate } from "../utlis/formatDate";
 import ActivityGraph from "./ActivityGraph";
+
 
 const Paste = () => {
   const pastes = useSelector((state) => state.paste.pastes);
@@ -74,7 +76,7 @@ const Paste = () => {
       paste.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
-
+  // hadleing the share function ... 
   const handleShare = (paste) => {
     if (navigator.share) {
       navigator
@@ -84,14 +86,15 @@ const Paste = () => {
           url: `/?pasteId=${paste._id}`,
         })
         .then(() => {
-          toast.success("Paste shared successfully!");
+          toast.success("Shared successfully!");
           setShareCounts((prev) => ({
             ...prev,
             [paste._id]: (prev[paste._id] || 0) + 1,
           }));
         })
-        .catch((error) => toast.error("Error sharing the paste."));
-    } else {
+        .catch((error) => toast.error("Error in Sharing. Try! Again"));
+    } 
+    else {
       toast.error("Sharing not supported in this browser.");
     }
   };
@@ -100,15 +103,15 @@ const Paste = () => {
     const options = { hour: "2-digit", minute: "2-digit", hour12: true };
     return new Date(dateString).toLocaleTimeString([], options);
   };
-
+  // like function     .. 
   const handleLike = (pasteId) => {
     setLikedPastes((prev) => ({
       ...prev,
       [pasteId]: (prev[pasteId] || 0) + 1,
     }));
-    toast.success("Thanks for Support");
+    toast.success("Liked Successfully");
   };
-
+  // view function 
   const handleViewContent = (pasteId) => {
     setViewCounts((prev) => {
       const updatedCounts = { ...prev, [pasteId]: (prev[pasteId] || 0) + 1 };
@@ -118,7 +121,7 @@ const Paste = () => {
 
     window.location.href = `/pastes/${pasteId}`;
   };
-
+  // edit function .. 
   const handleEdit = (pasteId) => {
     setEditCounts((prev) => {
       const updatedCounts = { ...prev, [pasteId]: (prev[pasteId] || 0) + 1 };
@@ -133,9 +136,9 @@ const Paste = () => {
     const storedCounts = localStorage.getItem("editCounts");
     return storedCounts ? JSON.parse(storedCounts) : {};
   });
-  
 
-  // Graph handlers
+
+  // Graph functin .... 
   const handleShowGraph = (paste) => {
     setSelectedPaste({
       ...paste,
@@ -165,11 +168,14 @@ const Paste = () => {
           />
         </div>
 
+        {/* Header Section */}
         <div className="flex flex-col border border-[rgba(128,121,121,0.3)] py-4 rounded-[0.4rem] dark:bg-black dark:border-gray-600">
           <div className="flex justify-between px-4 pb-4">
             <h2 className="text-4xl font-bold dark:text-white hover:scale-110 transition-transform duration-300">
               All Pastes
             </h2>
+
+            {/* // Filter Button*/}
             <div className="relative">
               <button
                 className="flex items-center space-x-2 px-4 py-2 bg-gray-200 dark:bg-blue-950 text-white dark:text-gray-300 rounded-md hover:scale-110 transform transition duration-300 hover:shadow-md"
@@ -215,12 +221,14 @@ const Paste = () => {
             </div>
           </div>
 
+          {/* FunctionalitY Section with icon ..  */}
           <div className="w-full px-4 pt-4 flex flex-col gap-y-5">
             {filteredPastes.length > 0 ? (
               filteredPastes.map((paste) => (
                 <div
                   key={paste?._id}
-                  className="paste-item transition-transform duration-200 transform hover:scale-105 hover:shadow-md hover:overflow-hidden border border-[rgba(128,121,121,0.3)] w-full gap-y-6 justify-between flex flex-col sm:flex-row p-4 rounded-[0.3rem] dark:bg-slate-800 dark:border-gray-600"
+                  className="paste-item transition-transform duration-200 transform hover:scale-105 hover:shadow-md hover:overflow-hidden border border-[rgba(128,121,121,0.3)] w-full gap-y-6 justify-between flex  sm:flex-row p-4 rounded-[0.3rem] dark:bg-slate-900 dark:border-gray-600
+                   "
                 >
                   <div className="w-[32%] flex flex-col space-y-4">
                     <div className="relative flex items-center ">
@@ -244,7 +252,7 @@ const Paste = () => {
                   </div>
 
                   <div className="w-full gap-2 sm:w-auto flex flex-col sm:flex-row items-center sm:items-start flex-wrap justify-center sm:justify-start">
-                    {/* Like Button */}
+                    {/* Like Button icon*/}
                     <div className="relative group">
                       <button
                         className="p-2 rounded-[0.2rem] bg-white border border-[#c7c7c7] hover:bg-transparent group hover:border-red-600 dark:bg-gray-700 dark:border-gray-600 hover:scale-125 transition duration-200"
@@ -260,13 +268,13 @@ const Paste = () => {
                         />
                       </button>
                  
-                      <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 p-1 bg-black text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                      <span className="absolute top-full  left-1/2 transform -translate-x-1/2 mt-1 p-1 bg-black text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                         Like
                       </span>
                     </div>
                     {/* 
                    
-                    {/* View Button */}
+                    {/* Read Button */}
                     <div className="relative group">
                       <button
                         className="p-2 rounded-[0.2rem] bg-white border border-[#c7c7c7] hover:bg-transparent group hover:border-green-500 dark:bg-gray-700 dark:border-gray-600 hover:scale-125 transition duration-200"
@@ -279,7 +287,7 @@ const Paste = () => {
                       </button>
                      
                       <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 p-1 bg-black text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                        View
+                        Read
                       </span>
                     </div>
 
@@ -333,7 +341,6 @@ const Paste = () => {
                           className="text-purple-500 group-hover:text-purple-600"
                         />
                       </button>
-                      {/* Tooltip for Show Graph Button */}
                       <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 p-1 bg-black text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                         Graph
                       </span>
@@ -352,7 +359,7 @@ const Paste = () => {
                         />
                       </button>
                   
-                      <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 p-1 bg-black text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                      <span className="absolute items-center top-full left-1/2 transform -translate-x-1/2 mt-1 p-1 bg-black text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                         Delete
                       </span>
                     </div>
@@ -377,3 +384,6 @@ const Paste = () => {
 };
 
 export default Paste;
+
+
+
